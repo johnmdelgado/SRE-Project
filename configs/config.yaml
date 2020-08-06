@@ -1,0 +1,12 @@
+passwordDefaults:
+    minPWLength: 8
+    maxPWLength: 64
+    asciiOnly: true
+    PasswordRegEx: '^[ -~]+$'
+
+debugging:
+    debug: false
+    testDebug: false
+
+testing:
+    testAtRun: false
