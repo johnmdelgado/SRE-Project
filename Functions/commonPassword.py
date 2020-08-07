@@ -15,8 +15,10 @@ def commonPasswordCheck(password,exludeList,debug):
         print("Entered common Password Check")
         print("Password is: {}".format(password))
         print("Exclude list is: {}".format(exludeList.size()))
+        print("encoded password is: {}".format(password.encode()))
 
     validPasswordCheck = re.search(password.encode(), exludeList)
+    print(validPasswordCheck)
 
     if(validPasswordCheck):
         print("Password: {} was found on the common password exception list.".format(password))
