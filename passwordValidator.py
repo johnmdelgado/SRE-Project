@@ -40,10 +40,11 @@ from Functions import outputFailure
 from Functions import characterCheck
 from Functions import fileImporter
 from Functions import commonPassword
+from Functions import convertInputToSet
 from inspect import currentframe, getframeinfo
 import sys
 
-def passwordValidator(filePath):
+def passwordValidator(convertedSet,filePath):
 #    if(not filePath):
 #         print("No file provided using default file from: {}".format(config["passwordDefaults"]["excludedPWFilepath"]))
 #         filePath = config["passwordDefaults"]["excludedPWFilepath"]
@@ -58,7 +59,7 @@ def passwordValidator(filePath):
 
     # TODO maybe need to add batching or parrellism. Huge files could be a problem.
 
-    for line in sys.stdin:
+    for line in convertedSet:
         # First check if password meets the length requirement. Fastest check for performance
         # Parameters are set from config file, except the dynamic Line that is being read
         # If the string fails this check, it will move to the next line in the file
@@ -114,4 +115,7 @@ if __name__ == '__main__':
     else:
         filePath = sys.argv[1]
 
-    passwordValidator(filePath)
+    convertedSet = convertInputToSet.convertInputToSet(sys.stdin,
+                        config["debugging"]["debug"])
+
+    passwordValidator(convertedSet,filePath)
