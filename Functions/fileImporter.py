@@ -2,12 +2,15 @@ import mmap
 import os
 import sys
 
-#sys.tracebacklimit=0
+
 
 def fileImporter(filePath,debug):
     if(debug):
         print("FileImporter function entered.") 
         print("File path being used:{}".format(filePath))
+        
+    if(not debug):
+        sys.tracebacklimit=0
 
 
     pathExists = os.path.exists(filePath)

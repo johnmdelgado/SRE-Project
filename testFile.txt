@@ -1,0 +1,11 @@
+test
+LengthIsOk
+a;lsdkfja;lva
+HUXEJ0F4UGJQIEJOUKM1QVNS6P9GS8808LXOVH0BZ3UI0OINIUVTELHF5UL6BOBA0
+9MVH3NTBV4WQGOCP44D3A7JUGW3OQ6J5RZ65PQ8VQGPRPD0NJNZ9JDDLR6SYYQF
+语言处理
+语言处理 is Language Processing in Chineese
+You should see the Greek word 'kosme': κόσμε 
+simpleAsciiString
+Th1sT3$th@s$p@c3$&$peci@lCharacters
+Th1s T3$t h@s $p@c3$ & $peci@l Characters

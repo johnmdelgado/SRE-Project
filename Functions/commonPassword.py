@@ -9,4 +9,16 @@ This function will be running the current string against a new line delimited li
 
 '''
 
-def commonPasswordCheck(password,file,includeProhibitedPasswordPath,debug):
+def commonPasswordCheck(password,exludeList,debug):
+
+    validPasswordCheck = exludeList.find(password)
+
+    if(not validPasswordCheck):
+        print("Password: {} was found on the common password exception list.".format(password))
+        return False
+    
+    else:
+        if(debug):
+            print("Password {} was a valid password. Moving to nextline.".format(password))
+
+        return True

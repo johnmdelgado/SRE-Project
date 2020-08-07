@@ -39,22 +39,17 @@ from Functions import length
 from Functions import outputFailure
 from Functions import characterCheck
 from Functions import fileImporter
+from Functions import commonPassword
 from inspect import currentframe, getframeinfo
 import sys
 
 def passwordValidator(filePath):
-    if(not filePath):
-        print("No file provided using default file from: {}".format(config["passwordDefaults"]["excludedPWFilepath"]))
-        filePath = config["passwordDefaults"]["excludedPWFilepath"]
+#    if(not filePath):
+#         print("No file provided using default file from: {}".format(config["passwordDefaults"]["excludedPWFilepath"]))
+#         filePath = config["passwordDefaults"]["excludedPWFilepath"]
     
-    dataSet = fileImporter(filePath,
-        config["debugging"]["debug"])
-    print(dataSet)
-
-    # import config yaml file for Password requirements
-    # requirements could change at a later date and easy to use same configs for test cases
-    with open("./configs/config.yaml", "r") as ymlfile:
-        config = yaml.safe_load(ymlfile)
+    excludedPassowords = fileImporter.fileImporter(filePath,
+        config["debugging"]["debug"])    
 
     # if testing is enabled. Generate unit testing results
     if(config["testing"]["testAtRun"]):
@@ -101,5 +96,22 @@ def passwordValidator(filePath):
                 outputFailure.outputFailure(failedValidation,
                     config["debugging"]["debug"])
                 continue # illegal character check end
-        
 
+        commonPasswordCheck = commonPassword.commonPasswordCheck(formattedString.encode(),
+                                excludedPassowords,
+                                config["debugging"]["debug"])
+
+
+if __name__ == '__main__':
+    # import config yaml file for Password requirements
+    # requirements could change at a later date and easy to use same configs for test cases
+    with open("./configs/config.yaml", "r") as ymlfile:
+        config = yaml.safe_load(ymlfile)
+
+    if(len(sys.argv) == 1):
+        print("No file provided using default file from: {}".format(config["passwordDefaults"]["excludedPWFilepath"]))
+        filePath = config["passwordDefaults"]["excludedPWFilepath"]
+    else:
+        filePath = sys.argv[1]
+
+    passwordValidator(filePath)
