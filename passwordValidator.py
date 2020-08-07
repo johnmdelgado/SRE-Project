@@ -38,58 +38,68 @@ import fileinput
 from Functions import length
 from Functions import outputFailure
 from Functions import characterCheck
+from Functions import fileImporter
 from inspect import currentframe, getframeinfo
 import sys
 
-# import config yaml file for Password requirements
-# requirements could change at a later date and easy to use same configs for test cases
-with open("./configs/config.yaml", "r") as ymlfile:
-    config = yaml.safe_load(ymlfile)
-
-# if testing is enabled. Generate unit testing results
-if(config["testing"]["testAtRun"]):
-    unittest.main()
-
-
-# TODO maybe need to add batching or parrellism. Huge files could be a problem.
-
-for line in sys.stdin:
-    # First check if password meets the length requirement. Fastest check for performance
-    # Parameters are set from config file, except the dynamic Line that is being read
-    # If the string fails this check, it will move to the next line in the file
-
-    formattedString = line.rstrip() # Need to strip new line character
-
-
-    lengthCheck = length.passwordLengthCheck(
-        config["passwordDefaults"]["minPWLength"],
-        config["passwordDefaults"]["maxPWLength"],
-        formattedString,  
-        config["debugging"]["debug"])  
-
-
-    if(not lengthCheck):
-        # TODO get current line number. Could cause performance issue for large files
-        failedValidation = "length"
-
-        outputFailure.outputFailure(failedValidation,
-            config["debugging"]["debug"])
-        continue # length check end
+def passwordValidator(filePath):
+    if(not filePath):
+        print("No file provided using default file from: {}".format(config["passwordDefaults"]["excludedPWFilepath"]))
+        filePath = config["passwordDefaults"]["excludedPWFilepath"]
     
-    # included the ascii only check in case requirements change to allow unicode characters
-    # However if requirements change to exclude different characters. 
-    # This flag can be flipped to false and the regex in the function can be modified
-    if(config["passwordDefaults"]["asciiOnly"]):
-        asciiCheck = characterCheck.checkPasswordCharacters(
-            formattedString,
-            config["passwordDefaults"]["PasswordRegEx"],  
+    dataSet = fileImporter(filePath,
+        config["debugging"]["debug"])
+    print(dataSet)
+
+    # import config yaml file for Password requirements
+    # requirements could change at a later date and easy to use same configs for test cases
+    with open("./configs/config.yaml", "r") as ymlfile:
+        config = yaml.safe_load(ymlfile)
+
+    # if testing is enabled. Generate unit testing results
+    if(config["testing"]["testAtRun"]):
+        unittest.main()
+
+
+    # TODO maybe need to add batching or parrellism. Huge files could be a problem.
+
+    for line in sys.stdin:
+        # First check if password meets the length requirement. Fastest check for performance
+        # Parameters are set from config file, except the dynamic Line that is being read
+        # If the string fails this check, it will move to the next line in the file
+
+        formattedString = line.rstrip() # Need to strip new line character
+
+
+        lengthCheck = length.passwordLengthCheck(
+            config["passwordDefaults"]["minPWLength"],
+            config["passwordDefaults"]["maxPWLength"],
+            formattedString,  
             config["debugging"]["debug"])  
-        
-        if(not asciiCheck):
-            failedValidation = "illegal character"
+
+
+        if(not lengthCheck):
+            # TODO get current line number. Could cause performance issue for large files
+            failedValidation = "length"
 
             outputFailure.outputFailure(failedValidation,
                 config["debugging"]["debug"])
-            continue # illegal character check end
-    
+            continue # length check end
+        
+        # included the ascii only check in case requirements change to allow unicode characters
+        # However if requirements change to exclude different characters. 
+        # This flag can be flipped to false and the regex in the function can be modified
+        if(config["passwordDefaults"]["asciiOnly"]):
+            asciiCheck = characterCheck.checkPasswordCharacters(
+                formattedString,
+                config["passwordDefaults"]["passwordRegEx"],  
+                config["debugging"]["debug"])  
+            
+            if(not asciiCheck):
+                failedValidation = "illegal character"
+
+                outputFailure.outputFailure(failedValidation,
+                    config["debugging"]["debug"])
+                continue # illegal character check end
+        
 

@@ -2,11 +2,13 @@ passwordDefaults:
     minPWLength: 8
     maxPWLength: 64
     asciiOnly: true
-    PasswordRegEx: '^[ -~]+$'
+    passwordRegEx: '^[ -~]+$'
+    excludedPWFilepath: "../prohibitedPasswords/CommonPasswords.txt"
+
 
 debugging:
     debug: false
-    testDebug: false
+    testDebug: true
 
 testing:
     testAtRun: false
