@@ -97,7 +97,7 @@ def passwordValidator(filePath):
                     config["debugging"]["debug"])
                 continue # illegal character check end
 
-        commonPasswordCheck = commonPassword.commonPasswordCheck(formattedString.encode(),
+        commonPasswordCheck = commonPassword.commonPasswordCheck(formattedString,
                                 excludedPassowords,
                                 config["debugging"]["debug"])
 

@@ -9,3 +9,5 @@ You should see the Greek word 'kosme': κόσμε
 simpleAsciiString
 Th1sT3$th@s$p@c3$&$peci@lCharacters
 Th1s T3$t h@s $p@c3$ & $peci@l Characters
+trustno1
+stalingrad

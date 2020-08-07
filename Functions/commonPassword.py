@@ -8,12 +8,17 @@ Version: 1.0 Initial Development
 This function will be running the current string against a new line delimited list of common passwords and password pharases that are not allowed. 
 
 '''
+import re
 
 def commonPasswordCheck(password,exludeList,debug):
+    if(debug):
+        print("Entered common Password Check")
+        print("Password is: {}".format(password))
+        print("Exclude list is: {}".format(exludeList.size()))
 
-    validPasswordCheck = exludeList.find(password)
+    validPasswordCheck = re.search(password.encode(), exludeList)
 
-    if(not validPasswordCheck):
+    if(validPasswordCheck):
         print("Password: {} was found on the common password exception list.".format(password))
         return False
     
