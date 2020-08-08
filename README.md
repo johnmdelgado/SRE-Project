@@ -30,16 +30,16 @@ Feel free to use any language, libraries or tools, with a preference towards Pyt
 # Getting Started
 This will provide instuctions on how to get this up and running locally. 
 
-Personal setup: Linux subsystem for windows running Debian
-PRETTY_NAME="Debian GNU/Linux 10 (buster)"
-NAME="Debian GNU/Linux"
-VERSION_ID="10"
-VERSION="10 (buster)"
-VERSION_CODENAME=buster
-ID=debian
-HOME_URL="https://www.debian.org/"
-SUPPORT_URL="https://www.debian.org/support"
-BUG_REPORT_URL="https://bugs.debian.org/"
+Personal setup: Linux subsystem for windows running Debian  
+PRETTY_NAME="Debian GNU/Linux 10 (buster)"  
+NAME="Debian GNU/Linux"  
+VERSION_ID="10"  
+VERSION="10 (buster)"  
+VERSION_CODENAME=buster  
+ID=debian  
+HOME_URL="https://www.debian.org/"  
+SUPPORT_URL="https://www.debian.org/support"  
+BUG_REPORT_URL="https://bugs.debian.org/"  
 
 ## Built with
 [Python 3.7.3](https://www.python.org/downloads/release/python-373/)
@@ -56,14 +56,61 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 ## Installation
 1. clone repo from: https://github.com/johnmdelgado/SRE-Project
 
+## Configuration
+Under the configs folder is the config.yaml file with configuration settings. These are the default values but can be updated as needed or as requirements change.  
+
+** Notes **  
+* If requirements change and you want to allow unicode characters you can flip the ascii check or if you want to exclude different characters using regex the ascii_only flag can be set to True and the regex in the config can be modified
+
+        password_defaults:
+            min_pw_length: 8
+            max_pw_length: 64
+            ascii_only: true
+            password_regex: '^[ -~]+$'
+            excluded_pw_filepath: "./data/common_passwords.txt"
+
+        output_settings:
+            output_valid_passwords: false
+
+        debugging:
+            debug: false
+            test_debug: false
+
+        testing:
+            sample_txt_file: "../test_file.txt"
+            sample_excluded_pw_filepath: "../data/common_passwords.txt"
+
 ## Example Usage
+** Notes **
 * In the repo there is a test_file.txt that you can use and or modify, but you can pass any values using cat from the commandline.  
-* you can also use a custom txt file containing passwords that are common or want to be exempted. Included in this package under the data folder is a common_passwords.txt that will be used by default if there isn't a txt file specifed.
+* You can also use a custom txt file containing passwords that are common or want to be exempted. Included in this package under the data folder is a common_passwords.txt that will be used by default if there isn't a txt file specifed.  
     
     cat test_file.txt | python3 ./password_validator.py
 
-* If you do supply your own exemption file it can be used by 
+* If you do supply your own exemption file it can be used by  
+
     cat test_file.txt | python3 ./password_validator.py "<Your Directory Here>"
+
+* you can also run without sending a file and prompt for input. Newline delimited as well. When you are finished entering values press ctrl+D to finish your input
+
+        python3 ./password_validator.py
+
+## Contributing 
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## References/Tools
+* https://gist.github.com/aminasian-ihr/10c2fb997fa84fb5760784d11fc309b3
+* https://regex101.com/
+
+
+## License  
+
+Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
