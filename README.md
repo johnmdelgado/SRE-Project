@@ -95,6 +95,13 @@ Under the configs folder is the config.yaml file with configuration settings. Th
 
         python3 ./password_validator.py
 
+## Testing 
+To use the unit tests for the scripts supplied with this function. Navigate to the tests folder and enter the follwing command  
+
+        python3 -m unittest
+
+This will execute all unit tests for each of the supplied scripts. If you want additional output from the test results be sure to enable the test_debug config value in the config.yaml file
+
 ## Contributing 
 
 1. Fork the Project
