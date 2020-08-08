@@ -1,0 +1,26 @@
+{
+  "name": "john_sre_password_validator",
+  "version": "1.0.0",
+  "description": "SRE coding assesment that takes in passwords and validates them",
+  "main": "password_validator.py",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "cd ./tests && python3 -m unittest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnmdelgado/SRE-Project.git"
+  },
+  "keywords": [
+    "password",
+    "validator"
+  ],
+  "author": "john m delagdo",
+  "license": "(MIT)",
+  "bugs": {
+    "url": "https://github.com/johnmdelgado/SRE-Project/issues"
+  },
+  "homepage": "https://github.com/johnmdelgado/SRE-Project#readme"
+}
