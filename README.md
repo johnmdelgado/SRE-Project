@@ -56,6 +56,18 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 ## Installation
 1. clone repo from: https://github.com/johnmdelgado/SRE-Project
 
+## Installation from npm
+1. ensure that you have node installed. To get Node.js from the default Debian software repository, you can use the apt package manager. First, refresh your local package index:  
+        sudo apt update  
+
+2. Then install the Node.js package, and npm the Node Package Manager:  
+
+        sudo apt install nodejs npm
+3. To verify that the install was successful, run the node command with the -v flag to get the version:  
+        node -v  
+        Output:  
+        v10.21.0
+
 ## Configuration
 Under the configs folder is the config.yaml file with configuration settings. These are the default values but can be updated as needed or as requirements change.  
 
@@ -113,6 +125,7 @@ This will execute all unit tests for each of the supplied scripts. If you want a
 ## References/Tools
 * https://gist.github.com/aminasian-ihr/10c2fb997fa84fb5760784d11fc309b3
 * https://regex101.com/
+* https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-debian-10
 
 
 ## License  
