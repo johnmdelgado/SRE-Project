@@ -35,70 +35,56 @@ password1 -> Error: Too Common
 import unittest
 import yaml
 import fileinput
-from Functions import length
-from Functions import outputFailure
-from Functions import characterCheck
-from Functions import fileImporter
-from Functions import commonPassword
-from Functions import convertInputToSet
+from scripts import length_validation
+from scripts import character_check
+from scripts import file_importer
+from scripts import common_password
+from scripts import convert_input_to_set
 from inspect import currentframe, getframeinfo
 import sys
 
-def passwordValidator(convertedSet,filePath):
+def password_validator(converted_set,file_path):
 #    if(not filePath):
-#         print("No file provided using default file from: {}".format(config["passwordDefaults"]["excludedPWFilepath"]))
-#         filePath = config["passwordDefaults"]["excludedPWFilepath"]
+#         print("No file provided using default file from: {}".format(config["password_defaults"]["excludedPWFilepath"]))
+#         filePath = config["password_defaults"]["excludedPWFilepath"]
     
-    excludedPassowords = fileImporter.fileImporter(filePath,
-        config["debugging"]["debug"])    
+    excluded_passwords = file_importer.file_importer(file_path,
+        config["debugging"]["debug"])
 
-    # if testing is enabled. Generate unit testing results
-    if(config["testing"]["testAtRun"]):
-        unittest.main()
-
-
-    for line in convertedSet:
+    for line in converted_set:
         # First check if password meets the length requirement. Fastest check for performance
         # Parameters are set from config file, except the dynamic Line that is being read
         # If the string fails this check, it will move to the next line in the file
 
-        formattedString = line.rstrip() # Need to strip new line character
+        formatted_string = line.rstrip() # Need to strip new line character
 
 
-        lengthCheck = length.passwordLengthCheck(
-            config["passwordDefaults"]["minPWLength"],
-            config["passwordDefaults"]["maxPWLength"],
-            formattedString,  
-            config["debugging"]["debug"])  
+        length_check = length_validation.length_validation(config["password_defaults"]["min_pw_length"],
+                                                          config["password_defaults"]["max_pw_length"],
+                                                          formatted_string,  
+                                                          config["debugging"]["debug"])  
 
 
-        if(not lengthCheck):
-            failedValidation = "length"
-
-            outputFailure.outputFailure(failedValidation,
-                config["debugging"]["debug"])
-            continue # length check end
+        if(not length_check):
+            continue 
         
         # included the ascii only check in case requirements change to allow unicode characters
         # However if requirements change to exclude different characters. 
         # This flag can be flipped to false and the regex in the function can be modified
-        if(config["passwordDefaults"]["asciiOnly"]):
-            asciiCheck = characterCheck.checkPasswordCharacters(
-                formattedString,
-                config["passwordDefaults"]["passwordRegEx"],  
-                config["debugging"]["debug"])  
+        if(config["password_defaults"]["ascii_only"]):
+            ascii_check = character_check.check_password_characters(formatted_string,
+                                                                   config["password_defaults"]["password_regex"],
+                                                                   config["debugging"]["debug"])  
             
-            if(not asciiCheck):
-                failedValidation = "illegal character"
+            if(not ascii_check):
+                continue 
 
-                outputFailure.outputFailure(failedValidation,
-                    config["debugging"]["debug"])
-                continue # illegal character check end
-
-        commonPasswordCheck = commonPassword.commonPasswordCheck(formattedString,
-                                excludedPassowords,
-                                config["debugging"]["debug"]) 
-
+        common_password_check = common_password.common_password_check(formatted_string,
+                                                                     excluded_passwords,
+                                                                     config["output_settings"]["output_valid_passwords"],
+                                                                     config["debugging"]["debug"]) 
+        if(common_password_check):
+            continue
 
 if __name__ == '__main__':
     # import config yaml file for Password requirements
@@ -106,13 +92,17 @@ if __name__ == '__main__':
     with open("./configs/config.yaml", "r") as ymlfile:
         config = yaml.safe_load(ymlfile)
 
+    # if testing is enabled. Generate unit testing results
+    if(config["testing"]["test_at_run"]):
+        unittest.main()
+
     if(len(sys.argv) == 1):
-        print("No file provided using default file from: {}".format(config["passwordDefaults"]["excludedPWFilepath"]))
-        filePath = config["passwordDefaults"]["excludedPWFilepath"]
+        print("No file provided using default file from: {}".format(config["password_defaults"]["excluded_pw_filepath"]))
+        file_path = config["password_defaults"]["excluded_pw_filepath"]
     else:
-        filePath = sys.argv[1]
+        file_path = sys.argv[1]
 
-    convertedSet = convertInputToSet.convertInputToSet(sys.stdin,
-                        config["debugging"]["debug"])
+    converted_set = convert_input_to_set.convert_input_to_set(sys.stdin,
+                                                             config["debugging"]["debug"])
 
-    passwordValidator(convertedSet,filePath)
+    password_validator(converted_set,file_path)

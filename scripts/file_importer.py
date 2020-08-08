@@ -16,7 +16,7 @@ import sys
 def file_importer(file_path,debug):
     if(debug):
         print("FileImporter function entered.") 
-        print("File path being used:{}".format(filePath))
+        print("File path being used:{}".format(file_path))
 
     if(not debug):
         sys.tracebacklimit=0
@@ -25,10 +25,10 @@ def file_importer(file_path,debug):
     path_exists = os.path.exists(file_path)
         
     if(not path_exists):       
-        raise TypeError("Filepath does not exist. Please check path at: {}".format(filePath))
+        raise TypeError("Filepath does not exist. Please check path at: {}".format(file_path))
 
     if(not file_path.endswith(".txt")):
-        raise TypeError("File provided from path: {} is not a .txt file. Please ensure the file is a newline delimited txt file".format(filePath))
+        raise TypeError("File provided from path: {} is not a .txt file. Please ensure the file is a newline delimited txt file".format(file_path))
     
     with open(file_path,"r") as file_to_search:
         mm = mmap.mmap(file_to_search.fileno(),

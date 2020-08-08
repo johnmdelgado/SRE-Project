@@ -11,7 +11,7 @@ This function will be running the current string against a new line delimited li
 import re
 
 
-def common_password_check(password, exclude_list, debug):
+def common_password_check(password, exclude_list, print_valid, debug):
     if(debug):
         print("Entered common Password Check")
         print("Password is: {}".format(password))
@@ -29,8 +29,7 @@ def common_password_check(password, exclude_list, debug):
         return True
 
     else:
-        if(debug):
-            print(
-                "Password {} was a valid password. Moving to nextline.".format(password))
+        if((debug) or (print_valid)):
+            print("Password {} was a valid password. Moving to nextline.".format(password))
 
         return False

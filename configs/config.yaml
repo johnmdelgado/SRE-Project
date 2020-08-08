@@ -20,10 +20,12 @@ password_defaults:
     password_regex: '^[ -~]+$'
     excluded_pw_filepath: "./data/common_passwords.txt"
 
+output_settings:
+    output_valid_passwords: false
 
 debugging:
-    debug: true
-    test_debug: true
+    debug: false
+    test_debug: false
 
 testing:
     sample_txt_file: "../test_file.txt"
