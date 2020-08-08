@@ -64,9 +64,17 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 
         sudo apt install nodejs npm
 3. To verify that the install was successful, run the node command with the -v flag to get the version:  
+
         node -v  
         Output:  
         v10.21.0
+4. Once npm is installed you can change to the directory that you want to have the package installed and then run this:  
+
+        sudo npm i john_sre_password_validator
+5. Navigate to the directory  
+
+        cd node_modules/
+        cd john_sre_password_validator/
 
 ## Configuration
 Under the configs folder is the config.yaml file with configuration settings. These are the default values but can be updated as needed or as requirements change.  
@@ -126,6 +134,7 @@ This will execute all unit tests for each of the supplied scripts. If you want a
 * https://gist.github.com/aminasian-ihr/10c2fb997fa84fb5760784d11fc309b3
 * https://regex101.com/
 * https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-debian-10
+* https://zellwk.com/blog/publish-to-npm/
 
 
 ## License  
