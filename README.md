@@ -59,7 +59,7 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 ## Configuration
 Under the configs folder is the config.yaml file with configuration settings. These are the default values but can be updated as needed or as requirements change.  
 
-** Notes **  
+**Notes**  
 * If requirements change and you want to allow unicode characters you can flip the ascii check or if you want to exclude different characters using regex the ascii_only flag can be set to True and the regex in the config can be modified
 
         password_defaults:
@@ -81,15 +81,15 @@ Under the configs folder is the config.yaml file with configuration settings. Th
             sample_excluded_pw_filepath: "../data/common_passwords.txt"
 
 ## Example Usage
-** Notes **
+**Notes**
 * In the repo there is a test_file.txt that you can use and or modify, but you can pass any values using cat from the commandline.  
 * You can also use a custom txt file containing passwords that are common or want to be exempted. Included in this package under the data folder is a common_passwords.txt that will be used by default if there isn't a txt file specifed.  
     
-    cat test_file.txt | python3 ./password_validator.py
+        cat test_file.txt | python3 ./password_validator.py
 
 * If you do supply your own exemption file it can be used by  
 
-    cat test_file.txt | python3 ./password_validator.py "<Your Directory Here>"
+        cat test_file.txt | python3 ./password_validator.py "<Your Directory Here>"
 
 * you can also run without sending a file and prompt for input. Newline delimited as well. When you are finished entering values press ctrl+D to finish your input
 
