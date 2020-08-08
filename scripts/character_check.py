@@ -1,5 +1,5 @@
 '''
-FileName: characterCheck.py
+FileName: character_check.py
 Author: John Delgado
 Created Date: 8/5/2020
 Version: 1.0 Initial Development
@@ -28,26 +28,12 @@ created it's own function for unit testing functionality and in case requirement
 import re  # regular expression module
 
 
-def checkPasswordCharacters(password,regEx, debug):
+def check_password_characters(password,regEx, debug):
     if(debug):
         print()
         print("Entering Ascii Character check")
         print("password is: {}".format(password))
 
-    """
-        Explanation from https://regex101.com/
-        ^ asserts position at start of a line
-            Match a single character present in the list below [ -~]+
-                + Quantifier — Matches between one and unlimited times, as many times as possible, giving back as needed (greedy)
-                -~ a single character in the range between   (index 32) and ~ (index 126) (case sensitive)
-        $ asserts position at the end of a line
-        Global pattern flags
-            g modifier: global. All matches (don't return after first match)
-            m modifier: multi line. Causes ^ and $ to match the begin/end of each line (not only begin/end of string)
-
-        a single character in the range between(index 32) and ~ (index 126) (case sensitive) This will allow all printable characters (Ascii)
-        added ^ and $ assertions after failed unit test: test_CombinationUnicodeString2
-    """
     
     regExpression = regEx
     check = re.match(regEx,password)

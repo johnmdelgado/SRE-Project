@@ -57,8 +57,6 @@ def passwordValidator(convertedSet,filePath):
         unittest.main()
 
 
-    # TODO maybe need to add batching or parrellism. Huge files could be a problem.
-
     for line in convertedSet:
         # First check if password meets the length requirement. Fastest check for performance
         # Parameters are set from config file, except the dynamic Line that is being read
@@ -75,7 +73,6 @@ def passwordValidator(convertedSet,filePath):
 
 
         if(not lengthCheck):
-            # TODO get current line number. Could cause performance issue for large files
             failedValidation = "length"
 
             outputFailure.outputFailure(failedValidation,
@@ -100,7 +97,7 @@ def passwordValidator(convertedSet,filePath):
 
         commonPasswordCheck = commonPassword.commonPasswordCheck(formattedString,
                                 excludedPassowords,
-                                config["debugging"]["debug"])
+                                config["debugging"]["debug"]) 
 
 
 if __name__ == '__main__':
