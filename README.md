@@ -47,7 +47,7 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 ## Prerequisites
 ### Python Version 3.7.3
     sudo apt-get update
-    sudo apt-get install python3.6
+    sudo apt-get install python3.7.3
 
 ### Python yaml package
     sudo apt-get install python-yaml
