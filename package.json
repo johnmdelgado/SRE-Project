@@ -1,5 +1,5 @@
 {
-  "name": "password_validator_john_sre_2020",
+  "name": "john_sre_password_validator",
   "version": "1.0.0",
   "description": "SRE coding assesment that takes in passwords and validates them",
   "main": "password_validator.py",
