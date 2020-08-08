@@ -1,0 +1,32 @@
+   
+        # Explanation from https://regex101.com/
+        # ^ asserts position at start of a line
+        #     Match a single character present in the list below [ -~]+
+        #         + Quantifier — Matches between one and unlimited times, as many times as possible, giving back as needed (greedy)
+        #         -~ a single character in the range between   (index 32) and ~ (index 126) (case sensitive)
+        # $ asserts position at the end of a line
+        # Global pattern flags
+        #     g modifier: global. All matches (don't return after first match)
+        #     m modifier: multi line. Causes ^ and $ to match the begin/end of each line (not only begin/end of string)
+
+        # a single character in the range between(index 32) and ~ (index 126) (case sensitive) This will allow all printable characters (Ascii)
+        # added ^ and $ assertions after failed unit test: test_CombinationUnicodeString2
+
+
+password_defaults:
+    min_pw_length: 8
+    max_pw_length: 64
+    ascii_only: true
+    password_regex: '^[ -~]+$'
+    excluded_pw_filepath: "./data/common_passwords.txt"
+
+output_settings:
+    output_valid_passwords: false
+
+debugging:
+    debug: false
+    test_debug: false
+
+testing:
+    sample_txt_file: "../test_file.txt"
+    sample_excluded_pw_filepath: "../data/common_passwords.txt"
