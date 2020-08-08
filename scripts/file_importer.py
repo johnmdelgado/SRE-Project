@@ -25,10 +25,10 @@ def file_importer(file_path,debug):
     path_exists = os.path.exists(file_path)
         
     if(not path_exists):       
-        raise TypeError("Filepath does not exist. Please check path at: {}".format(file_path))
+        raise Exception("Filepath does not exist. Please check path at: {}".format(file_path))
 
     if(not file_path.endswith(".txt")):
-        raise TypeError("File provided from path: {} is not a .txt file. Please ensure the file is a newline delimited txt file".format(file_path))
+        raise Exception("File provided from path: {} is not a .txt file. Please ensure the file is a newline delimited txt file".format(file_path))
     
     with open(file_path,"r") as file_to_search:
         mm = mmap.mmap(file_to_search.fileno(),

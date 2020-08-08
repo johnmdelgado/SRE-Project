@@ -30,4 +30,3 @@ debugging:
 testing:
     sample_txt_file: "../test_file.txt"
     sample_excluded_pw_filepath: "../data/common_passwords.txt"
-    test_at_run: false

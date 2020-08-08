@@ -42,6 +42,7 @@ class common_password_test_case(unittest.TestCase):
         for line in test_strings:
             result = common_password.common_password_check(line,
                                                         mm,
+                                                        config["output_settings"]["output_valid_passwords"],
                                                         config["debugging"]["test_debug"])
             self.assertTrue(result)
 
@@ -52,6 +53,7 @@ class common_password_test_case(unittest.TestCase):
         test_string = ("WhoaThisIsACrazyUniquePassword")
         result = common_password.common_password_check(test_string,
                                                     mm,
+                                                    config["output_settings"]["output_valid_passwords"],
                                                     config["debugging"]["test_debug"])
         self.assertFalse(result)
 

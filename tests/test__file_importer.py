@@ -30,12 +30,12 @@ class password_characters_test_case(unittest.TestCase):
     def test_file_path_does_not_exist(self):
         # should exit executing code
         test_string = "./test.txt"
-        self.assertRaises(TypeError, file_importer.file_importer, test_string,config["debugging"]["test_debug"])
+        self.assertRaises(Exception, file_importer.file_importer, test_string,config["debugging"]["test_debug"])
 
     def test_file_is_not_txt_file(self):
         # should exit executing code
         testString = "../data/test.csv"
-        self.assertRaises(TypeError, file_importer.file_importer, testString,config["debugging"]["test_debug"])
+        self.assertRaises(Exception, file_importer.file_importer, testString,config["debugging"]["test_debug"])
 
     # ========================================================================================
     # Valid filepaths returning map test cases
@@ -43,10 +43,9 @@ class password_characters_test_case(unittest.TestCase):
 
     def test_default_file_path_from_config(self):
             # should exit executing code
-            testString = config["password_defaults"]["excluded_pw_filepath"]
-            result = fileImporter.fileImporter(                        
-                testString, 
-                config["debugging"]["test_debug"])
+            testString = config["testing"]["sample_excluded_pw_filepath"]
+            result = file_importer.file_importer(testString, 
+                                                config["debugging"]["test_debug"])
             self.assertIsInstance(result, object)
 
 

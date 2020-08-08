@@ -42,6 +42,7 @@ from scripts import common_password
 from scripts import convert_input_to_set
 from inspect import currentframe, getframeinfo
 import sys
+import os
 
 def password_validator(converted_set,file_path):
 #    if(not filePath):
@@ -91,10 +92,6 @@ if __name__ == '__main__':
     # requirements could change at a later date and easy to use same configs for test cases
     with open("./configs/config.yaml", "r") as ymlfile:
         config = yaml.safe_load(ymlfile)
-
-    # if testing is enabled. Generate unit testing results
-    if(config["testing"]["test_at_run"]):
-        unittest.main()
 
     if(len(sys.argv) == 1):
         print("No file provided using default file from: {}".format(config["password_defaults"]["excluded_pw_filepath"]))
